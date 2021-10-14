@@ -1,10 +1,12 @@
 package com.yadong.springbootproject_1;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
+@MapperScan("com.yadong.springbootproject_1.dao")
 public class SpringBootProject1Application {
 
     public static void main(String[] args) {
