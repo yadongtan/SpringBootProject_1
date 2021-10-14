@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>登录界面</title>
+	<link rel="stylesheet" type="text/css" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="/css/default.css">
+	<link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+	<div class="htmleaf-container">
+		<header class="htmleaf-header">
+			<h1>用户登录界面</h1>
+			<div class="htmleaf-links">
+				<a class="htmleaf-icon icon-htmleaf-home-outline" href="http://www.htmleaf.com/" title="Home" target="_blank"><span> 返回主页</span></a>
+				<a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" href="http://www.htmleaf.com/css3/css3donghua/201507142228.html" title="返回上一页" target="_blank"><span> 返回上一页</span></a>
+			</div>
+		</header>
+		<div class="wrapper">
+			<div class="container">
+				<h1>Welcome</h1>
+				<form class="form" action="/api/user/check" method="post">
+					<input type="text" name="username" placeholder="Username">
+					<input type="password" name="password" placeholder="Password">
+					<button type="submit" id="login-button">Login</button>
+				</form>
+			</div>
+			
+			<ul class="bg-bubbles">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		<div class="related">
+		    <h3>仅供测试:</h3>
+		    <a href="">
+			  <img src="/related/1.jpg" width="300" alt="官网2"/>
+			  <h3>官网1</h3>
+			</a>
+			<a href="">
+			  <img src="/related/2.jpg" width="300" alt="官网2"/>
+			  <h3>官网2</h3>
+			</a>
+		</div>
+	</div>
+	
+	<script src="/js/jquery-2.1.1.min.js"></script>
+<!--	<script>-->
+<!--	$('#login-button').click(function (event) {-->
+<!--	    event.preventDefault();-->
+<!--	    $('form').fadeOut(500);-->
+<!--	    $('.wrapper').addClass('form-success');-->
+<!--	});-->
+<!--	</script>-->
+</body>
+</html>
