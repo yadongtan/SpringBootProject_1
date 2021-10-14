@@ -20,7 +20,6 @@ public class UserController{
     public Result check(@RequestParam("username") String username,
                         @RequestParam("password") String password) {
         Result result = new Result();
-
         if("".equals(username) || username == null || "".equals(password) || password == null){
             result.setCode(ResultEnum.NULL_USERNAME_PASSWORD);
             return result;
@@ -32,7 +31,6 @@ public class UserController{
             return result;
         }
 
-        System.out.println("/api/user/check");
         if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
             result.setCode(ResultEnum.SUCCESS);
             result.setData(true);
@@ -41,7 +39,6 @@ public class UserController{
         }
         return result;
     }
-
 }
 
 
