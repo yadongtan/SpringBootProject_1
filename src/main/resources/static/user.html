@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>user</title>
+    <script src="/js/jquery-2.1.1.min.js"></script>
+    <script>
+        $(function (){
+            $.ajax({
+                type:"get",
+                url: "/api/user",
+                async:false,
+                data: "",
+                success: function (result) {
+                    if(result.data != null){
+                        var user = result.data;
+                        $("#username").text(user.username);
+                        $("#phone_num").text(user.phone_num);
+                        $("#birth").text(user.birth);
+                        if(user.note == null){
+                            user.note = "这个用户很懒,什么都没写..."
+                        }
+                        $("#note").text(user.note);
+                    }
+                }
+            });
+        })
+    </script>
+</head>
+<body>
+<p>个人中心</p></br>
+<div>
+    <label>id:</label><p id="username"></p><br/>
+    <label>电话:</label><p id="phone_num"></p><br/>
+    <label>生日:</label><p id="birth"></p><br/>
+    <label>签名:</label><p id="note"></p><br/>
+</div>
+
+
+<a href="/myShop.html">到我的商铺</a>
+</body>
+
+</html>

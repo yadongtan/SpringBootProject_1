@@ -5,7 +5,11 @@ public enum ResultEnum {
     ERROR_USERNAME_PASSWORD(200,"用户名或密码错误"),
     NULL_USER(200,"不存在该用户"),
     NULL_USERNAME_PASSWORD(200,"用户名或密码为空"),
+    ERROR_ITEMS(301,"商品信息错误"),
+    ERROR_400(400,"参数错误"),
     ERROR_PERMIT(403,"权限禁止访问");
+
+
 
     private int code;
     private String msg;

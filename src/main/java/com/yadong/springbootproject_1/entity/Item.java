@@ -1,102 +1,115 @@
 package com.yadong.springbootproject_1.entity;
 
+import com.yadong.springbootproject_1.util.StringUtils;
 import org.apache.ibatis.type.Alias;
 import org.springframework.stereotype.Component;
 
-@Component
 @Alias("item")
+@Component
 public class Item {
 
-    private String item_id; //商品id
-    private String  item_name;  //商品名称
-    private Integer total;  //商品数量
-    private Integer purchases;  //已被购买次数
-    private Integer price;  //商品价格
-    private String kind;    //商品类型
-    private String info;    //商品信息
-    private String itemImgPath; //商品图片路径
-
-    public Item(){}
-
-    public Item(String item_id, String item_name, Integer total, Integer purchases, Integer price, String kind, String info, String itemImgPath) {
-        this.item_id = item_id;
-        this.item_name = item_name;
-        this.total = total;
-        this.purchases = purchases;
-        this.price = price;
-        this.kind = kind;
-        this.info = info;
-        this.itemImgPath = itemImgPath;
-    }
+    private String ownerId; //拥有者id
+    private String itemId; //商品id
+    private String  itemName;  //商品名称
+    private Integer itemTotal;  //商品数量
+    private Integer itemPurchases = 0;  //已被购买次数
+    private Integer itemPrice;  //商品价格
+    private String itemKind;    //商品类型
+    private String itemInfo = "该商品无简介";    //商品信息
+    private String itemImgPath = "img/item/item_img_default.png"; //商品图片路径
 
     @Override
     public String toString() {
         return "Item{" +
-                "item_id='" + item_id + '\'' +
-                ", item_name='" + item_name + '\'' +
-                ", total=" + total +
-                ", purchases=" + purchases +
-                ", price=" + price +
-                ", kind='" + kind + '\'' +
-                ", info='" + info + '\'' +
+                "ownerId='" + ownerId + '\'' +
+                ", itemId='" + itemId + '\'' +
+                ", itemName='" + itemName + '\'' +
+                ", itemTotal=" + itemTotal +
+                ", itemPurchases=" + itemPurchases +
+                ", itemPrice=" + itemPrice +
+                ", itemKind='" + itemKind + '\'' +
+                ", itemInfo='" + itemInfo + '\'' +
                 ", itemImgPath='" + itemImgPath + '\'' +
                 '}';
     }
 
-    public String getItem_id() {
-        return item_id;
+
+    public Item(String ownerId, String itemId, String itemName, Integer itemTotal, Integer itemPurchases, Integer itemPrice, String itemKind, String itemInfo, String itemImgPath) {
+        this.ownerId = ownerId;
+        this.itemId = itemId;
+        this.itemName = itemName;
+        this.itemTotal = itemTotal;
+        this.itemPurchases = itemPurchases;
+        this.itemPrice = itemPrice;
+        this.itemKind = itemKind;
+        this.itemInfo = itemInfo;
+        this.itemImgPath = itemImgPath;
     }
 
-    public void setItem_id(String item_id) {
-        this.item_id = item_id;
+
+
+    public String getOwnerId() {
+        return ownerId;
     }
 
-    public String getItem_name() {
-        return item_name;
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
     }
 
-    public void setItem_name(String item_name) {
-        this.item_name = item_name;
+    public String getItemId() {
+        return itemId;
     }
 
-    public Integer getTotal() {
-        return total;
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 
-    public void setTotal(Integer total) {
-        this.total = total;
+    public String getItemName() {
+        return itemName;
     }
 
-    public Integer getPurchases() {
-        return purchases;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
-    public void setPurchases(Integer purchases) {
-        this.purchases = purchases;
+    public Integer getItemTotal() {
+        return itemTotal;
     }
 
-    public Integer getPrice() {
-        return price;
+    public void setItemTotal(Integer itemTotal) {
+        this.itemTotal = itemTotal;
     }
 
-    public void setPrice(Integer price) {
-        this.price = price;
+    public Integer getItemPurchases() {
+        return itemPurchases;
     }
 
-    public String getKind() {
-        return kind;
+    public void setItemPurchases(Integer itemPurchases) {
+        this.itemPurchases = itemPurchases;
     }
 
-    public void setKind(String kind) {
-        this.kind = kind;
+    public Integer getItemPrice() {
+        return itemPrice;
     }
 
-    public String getInfo() {
-        return info;
+    public void setItemPrice(Integer itemPrice) {
+        this.itemPrice = itemPrice;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public String getItemKind() {
+        return itemKind;
+    }
+
+    public void setItemKind(String itemKind) {
+        this.itemKind = itemKind;
+    }
+
+    public String getItemInfo() {
+        return itemInfo;
+    }
+
+    public void setItemInfo(String itemInfo) {
+        this.itemInfo = itemInfo;
     }
 
     public String getItemImgPath() {
@@ -107,5 +120,11 @@ public class Item {
         this.itemImgPath = itemImgPath;
     }
 
+    public Item(){}
 
+    public static boolean canWrite(Item item){
+        return StringUtils.noNullStringInList(
+                item.ownerId,item.itemName,item.itemPrice.toString(),item.itemKind
+        );
+    }
 }

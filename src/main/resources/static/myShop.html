@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>myShop</title>
+    <script src="/js/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+<p>我的商铺</p>
+<a href="/user.html">返回个人中心</a>
+<br>
+<br>
+<br>
+<style>
+    td{
+        text-align: center;
+    }
+</style>
+
+
+<label>添加新商品到店铺</label>
+<form>
+    商品名称<input type="text" name="item_name" id="item_name"><br/>
+    商品数量<input type="text" name="item_total" id="item_total"><br/>
+    商品价格<input type="text" name="item_price" id="item_price"><br/>
+    商品种类<input type="text" name="item_kind" id="item_kind"><br/>
+    商品描述<input type="text" name="item_info" id="item_info"><br/>
+    <input type="button" id="addItem_btn" value="确定添加">
+</form>
+
+<div class="conter_middle">
+    <table cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th>商品名称&nbsp&nbsp</th>
+            <th>商品总数量&nbsp&nbsp</th>
+            <th>已购买数量&nbsp&nbsp</th>
+            <th>商品价格&nbsp&nbsp</th>
+            <th>商品种类&nbsp&nbsp</th>
+            <th>商品描述</th>
+        </tr>
+        </thead>
+        <tbody id="items_body">
+        <tr>商品名称&nbsp&nbsp</tr>
+        <tr>商品总数量&nbsp&nbsp</tr>
+        <tr>已购买数量&nbsp&nbsp</tr>
+        <tr>商品价格&nbsp&nbsp</tr>
+        <tr>商品种类&nbsp&nbsp</tr>
+        <tr>商品描述</tr>
+        </tbody>
+    </table>
+</div>
+    <script>
+        $(function () {
+            var getItems = function () {
+                $.ajax({
+                    type:"get",
+                    async: false,
+                    url: "/api/item",
+                    success: function (result) {
+                        if(result.data != null){
+                            items = result.data;
+                            var itemsTable;
+                            for(var i = 0;i<items.length;i++){
+                                if(items[i].itemInfo.length>12){
+                                    items[i].itemInfo = items[i].itemInfo.substr(0,12) + "...";
+                                }
+                                itemsTable += "<tr>"+
+                                    "<td >"+items[i].itemName+"</td>"+
+                                    "<td >"+items[i].itemTotal+"</td>"+
+                                    "<td >"+items[i].itemPurchases+"</td>"+
+                                    "<td >"+items[i].itemPrice+"</td>"+
+                                    "<td >"+items[i].itemKind+"</td>"+
+                                    "<td >"+ items[i].itemInfo+"</td>&nbsp&nbsp"+
+                                    "<td><button class='delete_btn' itemId="+ items[i].itemId +">删除</button>&nbsp&nbsp" +
+                                    "<button  class='update_btn' itemId="+ items[i].itemId +">修改</a></td>"
+                                    +"</tr>";
+                            }
+                            $("#items_body").html(itemsTable);
+                        }else{
+                            $("#items_body").html("暂无任何商品信息...");
+                        }
+                    }
+                });
+            }
+            $(".addItem_btn").click(function () {
+                $.ajax({
+                    type:"post",
+                    async: false,
+                    url: "/api/item",
+                    data: {
+                        "itemName": $("#item_name").val(),
+                        "itemTotal": $("#item_total").val(),
+                        "itemPrice": $("#item_price").val(),
+                        "itemInfo": $("#item_info").val(),
+                        "itemKind": $("#item_kind").val()
+                    },
+                    success: function (result){
+                        if(result.data == null){
+                            alert(result.msg);
+                        }  else{
+                            alert("成功添加" + result.data + "个商品");
+                            getItems();
+                        }
+                    }
+                })
+            })
+
+            $("#items_body").on("click",".delete_btn",function () {
+                $.ajax({
+                    type:"delete",
+                    url:"/api/item/" + $(this).attr("itemId"),
+                    success: function () {
+                        getItems();
+                    }
+                });
+            })
+            $("#items_body").on("click",".update_btn",function () {
+                    alert("5555...写不来修改");
+                });
+            getItems();
+        })
+    </script>
+
+</body>
+</html>

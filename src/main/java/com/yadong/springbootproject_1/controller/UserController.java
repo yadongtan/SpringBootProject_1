@@ -7,7 +7,7 @@ import com.yadong.springbootproject_1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import javax.servlet.http.HttpSession;
 
 @RequestMapping("/api/user")
 @RestController
@@ -17,7 +17,7 @@ public class UserController{
     UserService userService;
 
     @PostMapping("/check")
-    public Result check(@RequestParam("username") String username,
+    public Result check(HttpSession session, @RequestParam("username") String username,
                         @RequestParam("password") String password) {
         Result result = new Result();
         if("".equals(username) || username == null || "".equals(password) || password == null){
@@ -32,6 +32,9 @@ public class UserController{
         }
 
         if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
+            session.setAttribute("uid",user.getUid());
+            session.setAttribute("username", user.getUsername());
+            session.setAttribute("admin", user.isAdmin());
             result.setCode(ResultEnum.SUCCESS);
             result.setData(true);
         } else {
@@ -39,6 +42,21 @@ public class UserController{
         }
         return result;
     }
+
+    @GetMapping
+    public Result getUserInfo(HttpSession session){
+        Result result = new Result();
+        User user = userService.getUserByUid((String)session.getAttribute("uid"));
+        System.out.println(user);
+        if (user == null) {
+            result.setCode(ResultEnum.NULL_USER);
+        }else{
+            result.setCode(ResultEnum.SUCCESS);
+            result.setData(user);
+        }
+        return result;
+    }
+
 }
 
 

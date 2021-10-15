@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yadong.springbootproject_1.dao.ItemDao">
+    <select id="getItemByItemId" resultType="item">
+        select
+             owner_id,item_id,item_name,item_total,item_purchases,item_price,item_kind,item_info,item_img_path
+        from
+             t_item
+        where
+              item_id = #{itemId}
+    </select>
+    <select id="getItemsByOwnerId" resultType="item">
+        select
+             owner_id,item_id,item_name,item_total,item_purchases,item_price,item_kind,item_info,item_img_path
+        from
+             t_item
+        where
+              owner_id = #{ownerId}
+    </select>
+    <select id="getItemsByItemName" resultType="item">
+        select
+               owner_id,item_id,item_name,item_total,item_purchases,item_price,item_kind,item_info,item_img_path
+        from
+             t_item
+        where
+              item_name like concat('%',#{itemName},'%');
+    </select>
+    <select id="getItemsByItemKind" resultType="item">
+        select
+             owner_id,item_id,item_name,item_total,item_purchases,item_price,item_kind,item_info,item_img_path
+        from
+             t_item
+        where
+              item_kind like concat('%',#{itemKind},'%');
+    </select>
+    <insert id="addItem" parameterType="item">
+        INSERT INTO
+            t_item(owner_id,item_name,item_total,item_price,item_kind,item_info)
+        VALUES
+               (#{ownerId},#{itemName},#{itemTotal},#{itemPrice},#{itemKind},#{itemInfo});
+    </insert>
+    <delete id="deleteItem" parameterType="string">
+        delete from
+                    t_item
+        where item_id = #{itemId}
+    </delete>
+    <update id="updateItem" parameterType="item">
+        update
+            t_item
+        set
+            item_name=#{itemName},
+            item_total=#{itemTotal},
+            item_price=#{itemPrice},
+            item_kind=#{itemKind},
+            item_info=#{itemInfo}
+    </update>
+</mapper>
