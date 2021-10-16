@@ -13,5 +13,6 @@ public interface ItemService {
     int addItem(Item item);
     int deleteItem(String itemId);
     int updateItem(Item item);
+    List<Item> getAllItems();
 
 }

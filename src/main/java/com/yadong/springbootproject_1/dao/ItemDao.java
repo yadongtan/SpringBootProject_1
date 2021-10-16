@@ -12,9 +12,11 @@ public interface ItemDao {
     List<Item> getItemsByOwnerId(String ownerId);
     List<Item> getItemsByItemName(String itemName);
     List<Item> getItemsByItemKind(String itemKind);
+    List<Item> getAllItems();
     int addItem(Item item);
     int deleteItem(String itemId);
     int updateItem(Item item);
+
 
 
 }

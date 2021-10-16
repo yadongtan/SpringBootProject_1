@@ -2,9 +2,98 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>goods</title>
+    <title>欢迎来到商城</title>
+    <script src="/js/jquery-2.1.1.min.js"></script>
+    <script>
+        function showGoods(result) {
+            if(result.data != null){
+                var items = result.data;
+                var goods_list = "";
+                for(var i = 0;i<items.length;i++){
+                    if(items[i].itemInfo.length >= 15){
+                        items[i].itemInfo = items[i].itemInfo.substr(0,15) + "..."
+                    }
+                    goods_list +=
+                        "<a href='/detail.html?itemId="+ items[i].itemId + "'\
+                                       aria-posinset='0' aria-setsize='5'>\
+                                        <div className='img-wrapper'>\
+                                            <img className='a-all'\
+                                                 src='/"+ items[i].itemImgPath +"'\
+                                                 aria-labelledby='dg-item-tl-0'>\
+                                                <div className='mask'></div>\
+                                            </img>\
+                                        </div>\
+                                        <div className='info'>\
+                                            <h4 className='a-all' id='dg-item-tl-0'>" + items[i].itemName+"<h6>¥"+items[i].itemPrice+"</h6></h4>\
+                                            \
+                                            <p>"+items[i].itemInfo+"</p>\
+                                            <!-- <p class='extra'><span class='tb-ifont'>&#xe676;</span>0人说好</p> -->\
+                                        </div>\
+                                    </a>"
+                    ;
+                }
+                $("#goods-list").html(goods_list);
+            }else{
+                $("#goods-list").html("商城暂无商品哦");
+            }
+        }
+        $(function () {
+           $.ajax({
+               type:"get",
+               url: "/api/item/all",
+                success:function (result) {
+                    showGoods(result);
+                }
+           });
+
+           $("#search_btn").click(function () {
+               $.ajax({
+                   type: "get",
+                   url: "/api/item/" + $("#searchName").val(),
+                   success: function (result) {
+                       if(result.data != null){
+                           $("#search-count").text("共 " + result.data.length+" 条相关商品 ");
+                       }
+                       showGoods(result);
+                   }
+               });
+           })
+        });
+        $.ajax({
+           type: "get",
+            url:"/api/user",
+            success: function (result){
+               if(result.data != null) {
+                    $("#username").text(result.data.username);
+               }else{
+                   $("#username").text("点击登录");
+                   $("#username").attr("href").set("/index.html");
+                   $("#welcome_words").text("您还未登录");
+               }
+            }
+        });
+    </script>
 </head>
 <body>
-<p>goods</p>
+<h4 id="welcome_words">欢迎用户:</h4>
+<a id="username" href="/user.html"></a>
+
+<p>商城</p>
+    <form target="_top" name="search" class="search-query">
+        <input type="text" name="searchName" id="searchName">
+        <button type="button" id="search_btn">搜索我喜欢</button>
+    </form>
+    <p id="search-count"></p>
+<div class="goods-inner">
+    <h3 class="goods-hd mod-hd com-hd">
+        <span class="total-title fl">有好货</span>
+        <img class="mlogo fl" src="//img.alicdn.com/imgextra/i1/O1CN01EjcAPM25IsjiwGyYs_!!6000000007504-2-tps-65-20.png" title="有好货">
+        <p>
+        </p>
+    </h3>
+    <ul class="list clearfix goods-list" id="goods-list">
+
+    </ul>
+</div>
 </body>
 </html>

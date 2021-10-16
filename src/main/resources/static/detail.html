@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="/js/jquery-2.1.1.min.js"></script>
+    <script>
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
+        function setUserInfo(){
+            $.ajax({
+                type: "get",
+                url:"/api/user",
+                success: function (result){
+                    if(result.data != null) {
+                        $("#username").text(result.data.username);
+                    }else{
+                        $("#username").text("点击登录");
+                        $("#username").attr("href").set("/index.html");
+                    }
+                }
+            });
+        }
+        $(function () {
+                $.ajax({
+                    type:"get",
+                    url: "/api/item/detail/" + getUrlParam("itemId"),
+                    success: function (result) {
+                        if(result.data != null){
+                            $("#itemImg").attr("src","/"+result.data.itemImgPath)
+                            $("#itemName").text(result.data.itemName);
+                            $("#itemKind").text("类型:"+result.data.itemKind);
+                            $("#itemPrice").text("售价: ¥"+result.data.itemPrice);
+                            $("#itemCount").text("剩余 : "+ (result.data.itemTotal - result.data.itemPurchases));
+                            $("#itemInfo").text("商品介绍: " + result.data.itemInfo);
+                        }else{
+
+                        }
+                    }
+                })
+            setUserInfo();
+        }
+        )
+
+    </script>
+    <title>商品详情页</title>
+</head>
+<body>
+<h4 id="welcome_words">欢迎用户:</h4>
+<a id="username" href="/user.html"></a>
+
+    <h1 id="itemName">itemName</h1>
+    <img src="/img/item_img_default.png" id="itemImg"></img>
+    <h5 id="itemKind">itemKind</h5>
+    <h4 id="itemPrice">itemPrice</h4>
+    <h4 id="itemCount">itemCount</h4>
+    <h3 id="itemInfo">itemInfo</h3>
+
+</body>
+</html>

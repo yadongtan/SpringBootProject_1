@@ -35,6 +35,13 @@
         where
               item_kind like concat('%',#{itemKind},'%');
     </select>
+    <select id="getAllItems" resultType="Item">
+        select
+               owner_id,item_id,item_name,item_total,item_purchases,item_price,item_kind,item_info,item_img_path
+        from
+             t_item;
+
+    </select>
     <insert id="addItem" parameterType="item">
         INSERT INTO
             t_item(owner_id,item_name,item_total,item_price,item_kind,item_info)
