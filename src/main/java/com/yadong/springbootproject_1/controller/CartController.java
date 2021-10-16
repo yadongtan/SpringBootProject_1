@@ -149,10 +149,8 @@ public class CartController {
         Order order = new Order();
         for (Cart cart : cartList) {
             //1.设置订单号
-            Long currentTime = new Long(System.currentTimeMillis());
-            String ct = currentTime.toString();
             String orderId = uid
-                    + ct
+                    + System.currentTimeMillis()
                     + StringUtils.getRandomNum(5);
             System.out.println("orderId = "+orderId);
             order.setOrderId(orderId);
