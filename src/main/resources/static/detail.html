@@ -23,6 +23,19 @@
                 }
             });
         }
+        function getCartInfo() {
+            $.ajax({
+               type:"get",
+               url:"/api/cart",
+                success: function (result) {
+                    if(result.data != null){
+
+                    }else{
+                        $("#")
+                    }
+                }
+            });
+        }
         $(function () {
                 $.ajax({
                     type:"get",
@@ -58,5 +71,23 @@
     <h4 id="itemCount">itemCount</h4>
     <h3 id="itemInfo">itemInfo</h3>
 
+<h2>我的购物车</h2>
+<div class="conter_middle">
+    <table cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th>商品名称&nbsp&nbsp</th>
+            <th>单价价格&nbsp&nbsp</th>
+            <th>数量&nbsp&nbsp</th>
+        </tr>
+        </thead>
+        <tbody id="cart_body">
+        <tr>商品名称&nbsp&nbsp</tr>
+        <tr>单价价格&nbsp&nbsp</tr>
+        <tr>数量&nbsp&nbsp</tr>
+        </tbody>
+    </table>
+    <tr>总价</tr>
+</div>
 </body>
 </html>

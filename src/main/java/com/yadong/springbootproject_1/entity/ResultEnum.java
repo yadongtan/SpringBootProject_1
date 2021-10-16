@@ -7,8 +7,8 @@ public enum ResultEnum {
     NULL_USERNAME_PASSWORD(200,"用户名或密码为空"),
     ERROR_ITEMS(301,"商品信息错误"),
     ERROR_400(400,"参数错误"),
-    ERROR_PERMIT(403,"权限禁止访问");
-
+    ERROR_PERMIT(403,"权限禁止访问"),
+    NULL_DATA(200,"null");
 
 
     private int code;

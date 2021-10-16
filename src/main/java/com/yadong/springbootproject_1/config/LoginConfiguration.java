@@ -31,6 +31,5 @@ public class LoginConfiguration implements WebMvcConfigurer {
                 .excludePathPatterns("/css/**","/fonts/**","/img/**","/js/**","/related/**")
                 .excludePathPatterns("/","/index.html")
                 .excludePathPatterns("/api/user/**");
-
     }
 }
