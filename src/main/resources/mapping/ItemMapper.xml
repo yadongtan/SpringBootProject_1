@@ -5,7 +5,7 @@
 <mapper namespace="com.yadong.springbootproject_1.dao.ItemDao">
     <select id="getItemByItemId" resultType="item">
         select
-             owner_id,item_id,item_name,item_total,item_purchases,item_price,item_kind,item_info,item_img_path
+             owner_id,item_id,item_name,item_total,item_purchases,item_price,item_kind,item_info,item_img_path,item_version
         from
              t_item
         where
@@ -13,7 +13,7 @@
     </select>
     <select id="getItemsByOwnerId" resultType="item">
         select
-             owner_id,item_id,item_name,item_total,item_purchases,item_price,item_kind,item_info,item_img_path
+             owner_id,item_id,item_name,item_total,item_purchases,item_price,item_kind,item_info,item_img_path,item_version
         from
              t_item
         where
@@ -21,7 +21,7 @@
     </select>
     <select id="getItemsByItemName" resultType="item">
         select
-               owner_id,item_id,item_name,item_total,item_purchases,item_price,item_kind,item_info,item_img_path
+               owner_id,item_id,item_name,item_total,item_purchases,item_price,item_kind,item_info,item_img_path,item_version
         from
              t_item
         where
@@ -29,7 +29,7 @@
     </select>
     <select id="getItemsByItemKind" resultType="item">
         select
-             owner_id,item_id,item_name,item_total,item_purchases,item_price,item_kind,item_info,item_img_path
+             owner_id,item_id,item_name,item_total,item_purchases,item_price,item_kind,item_info,item_img_path,item_version
         from
              t_item
         where
@@ -37,7 +37,7 @@
     </select>
     <select id="getAllItems" resultType="Item">
         select
-               owner_id,item_id,item_name,item_total,item_purchases,item_price,item_kind,item_info,item_img_path
+               owner_id,item_id,item_name,item_total,item_purchases,item_price,item_kind,item_info,item_img_path,item_version
         from
              t_item;
 
@@ -61,6 +61,11 @@
             item_total=#{itemTotal},
             item_price=#{itemPrice},
             item_kind=#{itemKind},
-            item_info=#{itemInfo}
+            item_info=#{itemInfo},
+            item_version = item_version + 1
+        where
+            item_id=#{itemId}
+        and
+            item_version=#{itemVersion}
     </update>
 </mapper>

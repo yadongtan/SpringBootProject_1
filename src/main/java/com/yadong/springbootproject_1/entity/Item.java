@@ -17,6 +17,7 @@ public class Item {
     private String itemKind;    //商品类型
     private String itemInfo = "该商品无简介";    //商品信息
     private String itemImgPath = "img/item/item_img_default.png"; //商品图片路径
+    private Integer itemVersion;    //版本号
 
     @Override
     public String toString() {
@@ -30,11 +31,12 @@ public class Item {
                 ", itemKind='" + itemKind + '\'' +
                 ", itemInfo='" + itemInfo + '\'' +
                 ", itemImgPath='" + itemImgPath + '\'' +
+                ", itemVersion=" + itemVersion +
                 '}';
     }
 
 
-    public Item(String ownerId, String itemId, String itemName, Integer itemTotal, Integer itemPurchases, Integer itemPrice, String itemKind, String itemInfo, String itemImgPath) {
+    public Item(String ownerId, String itemId, String itemName, Integer itemTotal, Integer itemPurchases, Integer itemPrice, String itemKind, String itemInfo, String itemImgPath, Integer itemVersion) {
         this.ownerId = ownerId;
         this.itemId = itemId;
         this.itemName = itemName;
@@ -44,8 +46,17 @@ public class Item {
         this.itemKind = itemKind;
         this.itemInfo = itemInfo;
         this.itemImgPath = itemImgPath;
+        this.itemVersion = itemVersion;
     }
 
+
+    public Integer getItemVersion() {
+        return itemVersion;
+    }
+
+    public void setItemVersion(Integer itemVersion) {
+        this.itemVersion = itemVersion;
+    }
 
 
     public String getOwnerId() {

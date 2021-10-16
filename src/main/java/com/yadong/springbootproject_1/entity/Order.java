@@ -9,43 +9,28 @@ import java.sql.Date;
 @Alias("order")
 public class Order {
 
-    private String order_id;    //订单号
-    private String userId; //外键(用户uid)
+    private String orderId;    //订单号
+    private String uid; //外键(用户uid)
     private String itemId; //外键(商品itemId)
-    private Integer count;  //数量
+    private Integer counts;  //数量
     private Integer singlePrice;    //单价
     private Integer totalPrice; //总价
     private Date orderTime; //下单时间
 
-    public Order(){}
-
-    public Order(String order_id, String userId, String itemId, Integer count, Integer singlePrice, Integer totalPrice, Date orderTime) {
-        this.order_id = order_id;
-        this.userId = userId;
-        this.itemId = itemId;
-        this.count = count;
-        this.singlePrice = singlePrice;
-        this.totalPrice = totalPrice;
-        this.orderTime = orderTime;
+    public String getOrderId() {
+        return orderId;
     }
 
-
-
-
-    public String getOrder_id() {
-        return order_id;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
-    public void setOrder_id(String order_id) {
-        this.order_id = order_id;
+    public String getUid() {
+        return uid;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getItemId() {
@@ -56,12 +41,12 @@ public class Order {
         this.itemId = itemId;
     }
 
-    public Integer getCount() {
-        return count;
+    public Integer getCounts() {
+        return counts;
     }
 
-    public void setCount(Integer count) {
-        this.count = count;
+    public void setCounts(Integer count) {
+        this.counts = count;
     }
 
     public Integer getSinglePrice() {
@@ -87,6 +72,21 @@ public class Order {
     public void setOrderTime(Date orderTime) {
         this.orderTime = orderTime;
     }
+
+
+    public Order(){}
+
+    public Order(String orderId, String uid, String itemId, Integer counts, Integer singlePrice, Integer totalPrice, Date orderTime) {
+        this.orderId = orderId;
+        this.uid = uid;
+        this.itemId = itemId;
+        this.counts = counts;
+        this.singlePrice = singlePrice;
+        this.totalPrice = totalPrice;
+        this.orderTime = orderTime;
+    }
+
+
 
 
 }

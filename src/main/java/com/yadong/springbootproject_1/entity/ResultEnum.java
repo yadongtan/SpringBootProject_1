@@ -6,10 +6,12 @@ public enum ResultEnum {
     NULL_USER(200,"不存在该用户"),
     NULL_USERNAME_PASSWORD(200,"用户名或密码为空"),
     ERROR_ITEMS(301,"商品信息错误"),
+    NULL_CART(302,"购物车为空"),
+    NO_ITEMS(303,"商品库存不足"),
+
     ERROR_400(400,"参数错误"),
     ERROR_PERMIT(403,"权限禁止访问"),
     NULL_DATA(200,"null");
-
 
     private int code;
     private String msg;
