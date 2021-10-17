@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @Configuration
-public class LoginConfiguration implements WebMvcConfigurer {
+public class MyWebMvcConfiguration implements WebMvcConfigurer {
 
     @Autowired
     private LoginInterceptor loginInterceptor;

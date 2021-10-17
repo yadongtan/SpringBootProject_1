@@ -54,6 +54,18 @@ spring:
   mvc:
     static-path-pattern: /**
 
+  redis:
+    database: 0
+    host: 192.168.45.128
+    port: 6379
+    timeout: 10s
+    password: yadong
+    jedis:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-active: 8
+        max-wait: -1m
 
 mybatis:
   mapper-locations: classpath:mapping/*.xml
