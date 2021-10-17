@@ -13,8 +13,8 @@ public class Order {
     private String uid; //外键(用户uid)
     private String itemId; //外键(商品itemId)
     private Integer counts;  //数量
-    private Integer singlePrice;    //单价
-    private Integer totalPrice; //总价
+    private Double singlePrice;    //单价
+    private Double totalPrice; //总价
     private Date orderTime; //下单时间
 
     public String getOrderId() {
@@ -49,19 +49,19 @@ public class Order {
         this.counts = count;
     }
 
-    public Integer getSinglePrice() {
+    public Double getSinglePrice() {
         return singlePrice;
     }
 
-    public void setSinglePrice(Integer singlePrice) {
+    public void setSinglePrice(Double singlePrice) {
         this.singlePrice = singlePrice;
     }
 
-    public Integer getTotalPrice() {
+    public Double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Integer totalPrice) {
+    public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
@@ -73,10 +73,9 @@ public class Order {
         this.orderTime = orderTime;
     }
 
-
     public Order(){}
 
-    public Order(String orderId, String uid, String itemId, Integer counts, Integer singlePrice, Integer totalPrice, Date orderTime) {
+    public Order(String orderId, String uid, String itemId, Integer counts, Double singlePrice, Double totalPrice, Date orderTime) {
         this.orderId = orderId;
         this.uid = uid;
         this.itemId = itemId;
@@ -85,8 +84,4 @@ public class Order {
         this.totalPrice = totalPrice;
         this.orderTime = orderTime;
     }
-
-
-
-
 }

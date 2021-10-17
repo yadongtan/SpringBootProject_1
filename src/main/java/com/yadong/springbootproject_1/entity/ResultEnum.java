@@ -8,7 +8,8 @@ public enum ResultEnum {
     ERROR_ITEMS(301,"商品信息错误"),
     NULL_CART(302,"购物车为空"),
     NO_ITEMS(303,"商品库存不足"),
-
+    TRY_LATER(304,"当前访问人数较多,请稍后再试"),
+    EXIST_ITEMS(305,"该商品信息已存在,请先移除原有信息"),
     ERROR_400(400,"参数错误"),
     ERROR_PERMIT(403,"权限禁止访问"),
     NULL_DATA(200,"null");

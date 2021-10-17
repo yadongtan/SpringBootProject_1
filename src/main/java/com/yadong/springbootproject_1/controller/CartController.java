@@ -170,13 +170,13 @@ public class CartController {
                 item.setItemTotal(item.getItemTotal() - order.getCounts());
                 int re = itemService.updateItem(item);
                 if(re == 0){    //乐观锁,re为0,说明被修改,version不匹配
-                    result.setCode(ResultEnum.ERROR_400);
+                    result.setCode(ResultEnum.TRY_LATER);
                     return result;
                 }//继续往下执行说明数据没有问题
             }
-            order.setSinglePrice(item.getItemPrice());
+            order.setSinglePrice(new Double(item.getItemPrice()));
             //6.设置total_price
-            order.setTotalPrice(item.getItemPrice()*cart.getItemCount());
+            order.setTotalPrice(new Double(item.getItemPrice())*cart.getItemCount());
             //7.设置order_time
             order.setOrderTime(new Date(System.currentTimeMillis()));
             int re = orderService.addOrder(order);
