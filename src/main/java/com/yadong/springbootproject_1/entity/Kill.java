@@ -12,16 +12,24 @@ public class Kill {
     Double itemPrice;   //秒杀价格
     Long setTime; //这个秒杀商品加入系统的时间
     Long killTime;   //倒计时,以秒为单位
+    boolean killAble = false;
 
-    @Override
-    public String toString() {
-        return "Kill{" +
-                "itemId='" + itemId + '\'' +
-                ", itemCount=" + itemCount +
-                ", itemPrice=" + itemPrice +
-                ", setTime=" + setTime +
-                ", killTime=" + killTime +
-                '}';
+
+    public Kill(String itemId, Integer itemCount, Double itemPrice, Long setTime, Long killTime, boolean killAble) {
+        this.itemId = itemId;
+        this.itemCount = itemCount;
+        this.itemPrice = itemPrice;
+        this.setTime = setTime;
+        this.killTime = killTime;
+        this.killAble = killAble;
+    }
+
+    public boolean isKillAble() {
+        return killAble;
+    }
+
+    public void setKillAble(boolean killAble) {
+        this.killAble = killAble;
     }
 
     public Kill(String itemId, Integer itemCount, Double itemPrice, Long setTime, Long killTime) {

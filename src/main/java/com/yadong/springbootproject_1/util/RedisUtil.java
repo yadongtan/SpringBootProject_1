@@ -1,8 +1,15 @@
 package com.yadong.springbootproject_1.util;
 
 
+import com.yadong.springbootproject_1.controller.KillController;
+import com.yadong.springbootproject_1.entity.Kill;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -17,6 +24,8 @@ public class RedisUtil {
 
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;
+
+    private RedisOperations operations;
 
     /**
      * 指定缓存失效时间
@@ -522,4 +531,35 @@ public class RedisUtil {
             return 0L;
         }
     }
+
+    public List<Object> killItem(Kill kill){
+
+        List<Object> txResults = redisTemplate.execute(new SessionCallback<List<Object>>(){
+            @Override
+            public List<Object> execute(RedisOperations operations) throws DataAccessException {
+                operations.watch(KillController.KILL_ITEMS_HASH_NAME);
+                Integer o = (Integer) operations.opsForHash().get(KillController.KILL_ITEMS_HASH_NAME, kill.getItemCountKey());
+                if( o == null || o <= 0){
+                    operations.unwatch();
+                    return null;
+                }
+                operations.multi();
+                operations.opsForHash().increment(KillController.KILL_ITEMS_HASH_NAME, kill.getItemCountKey(), -1L);
+                return operations.exec();
+            }
+        });
+
+
+        return txResults;
+    }
+
+
+//    public void watchAndMulti(String watchKey){
+//        redisTemplate.watch(watchKey);
+//        redisTemplate.multi();
+//    }
+//
+//    public List<Object> exec(){
+//        return redisTemplate.exec();
+//    }
 }

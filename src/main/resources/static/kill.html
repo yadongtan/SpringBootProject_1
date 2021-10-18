@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品秒杀测试</title>
+    <script src="/js/jquery-2.1.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#kill").click(function () {
+                $.ajax({
+                    type: "post",
+                    url: "/api/kill/order/" + $("#itemId").val(),
+                    data: {"itemId":$("#itemId").val() },
+                    success: function (result) {
+                        alert(result.msg);
+                    }
+                })
+            });
+        });
+    </script>
+</head>
+<body>
+
+<form>
+    <input type="text" name="itemId" id="itemId" value="1000000001">
+    <input type="button" name="submit" id="kill" value="秒杀">
+</form>
+
+</body>
+</html>
